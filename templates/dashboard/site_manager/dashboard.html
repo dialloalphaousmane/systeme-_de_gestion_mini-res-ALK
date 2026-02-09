@@ -1,0 +1,75 @@
+{% extends 'dashboard/_base_dashboard.html' %}
+
+{% block title %}Dashboard Responsable Site - SGM{% endblock %}
+
+{% block dashboard_content %}
+<div class="space-y-6">
+    <div class="bg-white rounded-xl border border-gray-200 p-5">
+        <div class="text-sm font-semibold text-gray-500">Site assigné</div>
+        <div class="mt-1 text-xl font-extrabold text-gray-900">
+            {% if site %}{{ site.name }}{% else %}Aucun site{% endif %}
+        </div>
+        {% if site %}
+            <div class="mt-1 text-sm text-gray-600">{{ site.get_mineral_type_display }} · {{ site.region }}</div>
+        {% endif %}
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+        <div class="bg-white rounded-xl border border-gray-200 p-5">
+            <div class="text-sm font-semibold text-gray-500">Volume extrait</div>
+            <div class="mt-1 text-2xl font-extrabold text-gray-900">{{ total_extraction_volume|default:0 }}</div>
+            <div class="mt-3 text-xs text-gray-500">Tonnes (cumul)</div>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-200 p-5">
+            <div class="text-sm font-semibold text-gray-500">Stock actuel</div>
+            <div class="mt-1 text-2xl font-extrabold text-gray-900">{{ current_stock|default:0 }}</div>
+            <div class="mt-3 text-xs text-gray-500">Tonnes en stock</div>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-200 p-5">
+            <div class="text-sm font-semibold text-gray-500">Transports</div>
+            <div class="mt-1 text-2xl font-extrabold text-gray-900">{{ transports_count|default:"-" }}</div>
+            <div class="mt-3 text-xs text-gray-500">Total plateforme</div>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-200 p-5">
+            <div class="text-sm font-semibold text-gray-500">Exports</div>
+            <div class="mt-1 text-2xl font-extrabold text-gray-900">{{ exports_count|default:"-" }}</div>
+            <div class="mt-3 text-xs text-gray-500">Total plateforme</div>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-xl border border-gray-200">
+        <div class="p-5 border-b border-gray-200">
+            <div class="text-sm font-semibold text-gray-500">Logistique</div>
+            <div class="text-lg font-extrabold text-gray-900">Derniers transports</div>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">QR</th>
+                        <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Statut</th>
+                        <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Départ</th>
+                        <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Destination</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    {% if recent_transports %}
+                        {% for t in recent_transports %}
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">{{ t.qr_code }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ t.get_status_display }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ t.departure_location }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ t.destination }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td class="px-6 py-4 text-sm text-gray-600" colspan="4">Aucun transport récent.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

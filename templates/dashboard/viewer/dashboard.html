@@ -1,0 +1,49 @@
+{% extends 'dashboard/_base_dashboard.html' %}
+
+{% block title %}Dashboard Lecteur - SGM{% endblock %}
+
+{% block dashboard_content %}
+<div class="space-y-6">
+    <div class="bg-white rounded-xl border border-gray-200 p-5">
+        <div class="text-sm font-semibold text-gray-500">Accès</div>
+        <div class="mt-1 text-lg font-extrabold text-gray-900">Lecture seule</div>
+        <p class="mt-2 text-sm text-gray-600">Aperçu des indicateurs globaux de la plateforme.</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+        <div class="bg-white rounded-xl border border-gray-200 p-5">
+            <div class="flex items-center justify-between">
+                <div>
+                    <div class="text-sm font-semibold text-gray-500">Extractions</div>
+                    <div class="mt-1 text-2xl font-extrabold text-gray-900">{{ extractions_count|default:"-" }}</div>
+                </div>
+                <div class="h-10 w-10 rounded-lg bg-amber-50 flex items-center justify-center">
+                    <i class="fas fa-mountain text-amber-600"></i>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-200 p-5">
+            <div class="flex items-center justify-between">
+                <div>
+                    <div class="text-sm font-semibold text-gray-500">Transports</div>
+                    <div class="mt-1 text-2xl font-extrabold text-gray-900">{{ transports_count|default:"-" }}</div>
+                </div>
+                <div class="h-10 w-10 rounded-lg bg-blue-50 flex items-center justify-center">
+                    <i class="fas fa-truck text-blue-600"></i>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-200 p-5">
+            <div class="flex items-center justify-between">
+                <div>
+                    <div class="text-sm font-semibold text-gray-500">Exports</div>
+                    <div class="mt-1 text-2xl font-extrabold text-gray-900">{{ exports_count|default:"-" }}</div>
+                </div>
+                <div class="h-10 w-10 rounded-lg bg-purple-50 flex items-center justify-center">
+                    <i class="fas fa-file-export text-purple-600"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

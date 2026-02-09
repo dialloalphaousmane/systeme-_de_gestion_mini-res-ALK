@@ -1,0 +1,33 @@
+{% extends 'dashboard/_base_dashboard.html' %}
+
+{% block title %}Dashboard Environnement - SGM{% endblock %}
+
+{% block dashboard_content %}
+<div class="space-y-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+        <div class="bg-white rounded-xl border border-gray-200 p-5">
+            <div class="text-sm font-semibold text-gray-500">Sites</div>
+            <div class="mt-1 text-2xl font-extrabold text-gray-900">{{ sites_count|default:"-" }}</div>
+            <div class="mt-3 text-xs text-gray-500">Sites suivis</div>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-200 p-5">
+            <div class="text-sm font-semibold text-gray-500">Extractions</div>
+            <div class="mt-1 text-2xl font-extrabold text-gray-900">{{ extractions_count|default:"-" }}</div>
+            <div class="mt-3 text-xs text-gray-500">Total plateforme</div>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-200 p-5">
+            <div class="text-sm font-semibold text-gray-500">Transports</div>
+            <div class="mt-1 text-2xl font-extrabold text-gray-900">{{ transports_count|default:"-" }}</div>
+            <div class="mt-3 text-xs text-gray-500">En cours / historique</div>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-xl border border-gray-200 p-5">
+        <div class="text-sm font-semibold text-gray-500">À venir</div>
+        <div class="mt-1 text-lg font-extrabold text-gray-900">Module Environnement</div>
+        <p class="mt-2 text-sm text-gray-600">
+            Ici on affichera les mesures, seuils et alertes (poussière, bruit, eau, etc.).
+        </p>
+    </div>
+</div>
+{% endblock %}

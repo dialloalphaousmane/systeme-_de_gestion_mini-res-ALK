@@ -284,8 +284,23 @@ environnement  | env@example.com           | Responsable Environnement
 lecteur        | lecteur@example.com       | Lecteur/Visiteur
 resp_site      | resp.site@example.com     | Responsable Site
 
-
+'admin_user': 'Admin@2026!',
+  'agent_minier': 'Agent@2026!',
+  'resp_site': 'Site@2026!',
+  'chauffeur': 'Driver@2026!',
+  'douane': 'Douane@2026!',
+  'environnement': 'Env@2026!',
+  'lecteur': 'Lecteur@2026!',
+  'alpha': 'Lecteur@2026!',
 
 
 **© 2024 SGM - Système de Gestion Minière. Tous droits réservés.**
 # systeme-_de_gestion_mini-res-ALK
+
+
+
+
+
+pour la connexion avec winserf
+
+https://codegeex.cn/auth?sessionId=bfddd37f-4c6c-4298-9f33-6c8cb675a380&machineId=4fd368a50cab7edf1f493950ad5427e90b9ac12fca180ac55f52481aaf7b6541&device=vscode_desktop

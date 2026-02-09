@@ -1,0 +1,60 @@
+{% extends 'dashboard/_base_dashboard.html' %}
+{% load i18n %}
+
+{% block dashboard_content %}
+<div class="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
+    <h2 class="text-2xl font-semibold text-gray-700 dark:text-gray-200 mb-6">{{ title }}</h2>
+
+    <form method="post" class="space-y-6">
+        {% csrf_token %}
+        
+        <!-- Affichage des erreurs non liées à un champ -->
+        {% if form.non_field_errors %}
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                {% for error in form.non_field_errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Boucle sur les champs du formulaire -->
+        {% for field in form %}
+            <div class="field-wrapper">
+                <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ field.label }}</label>
+                <div class="mt-1">
+                    {{ field }}
+                </div>
+                {% if field.help_text %}
+                    <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">{{ field.help_text }}</p>
+                {% endif %}
+                {% for error in field.errors %}
+                    <p class="mt-2 text-sm text-red-600">{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <!-- Boutons d'action -->
+        <div class="flex items-center justify-end space-x-4 pt-4">
+            <a href="{% url 'dashboard:admin_user_list' %}" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600">{% trans "Annuler" %}</a>
+            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                {% trans "Enregistrer" %}
+            </button>
+        </div>
+    </form>
+</div>
+
+{% block extra_js %}
+<script>
+    // Ajout de classes Tailwind aux champs de formulaire
+    document.addEventListener('DOMContentLoaded', function() {
+        const fields = document.querySelectorAll('input, select, textarea');
+        fields.forEach(function(field) {
+            if (field.type !== 'checkbox') {
+                field.classList.add('mt-1', 'block', 'w-full', 'px-3', 'py-2', 'border', 'border-gray-300', 'rounded-md', 'shadow-sm', 'focus:outline-none', 'focus:ring-indigo-500', 'focus:border-indigo-500', 'sm:text-sm', 'dark:bg-gray-700', 'dark:border-gray-600', 'dark:placeholder-gray-400', 'dark:text-white');
+            }
+        });
+    });
+</script>
+{% endblock %}
+
+{% endblock %}
